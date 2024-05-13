@@ -1,8 +1,6 @@
 package org.launchcode.codingevents.models;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.Objects;
 
@@ -24,13 +22,52 @@ public class Event {
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
+    @NotBlank(message="Location cannot be left blank.")
+    private String location;
+    @AssertTrue(message = "Registration must be required")
+    private boolean requiresRegistration;
+    @Positive(message="Number of attendees must be one or more.")
+    private int numberOfAttendees;
 
-    public Event(String name, String description, String contactEmail) {
-        this();
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public boolean isRequiresRegistration() {
+        return requiresRegistration;
+    }
+
+    public void setRequiresRegistration(boolean requiresRegistration) {
+        this.requiresRegistration = requiresRegistration;
+    }
+
+    public int getNumberOfAttendees() {
+        return numberOfAttendees;
+    }
+
+    public void setNumberOfAttendees(int numberOfAttendees) {
+        this.numberOfAttendees = numberOfAttendees;
+    }
+
+    public Event(String name, String description, String contactEmail, String location, boolean requiresRegistration, int numberOfAttendees) {
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
+        this.location = location;
+        this.requiresRegistration = requiresRegistration;
+        this.numberOfAttendees = numberOfAttendees;
     }
+
+//    public Event(String name, String description, String contactEmail) {
+//        this();
+//        this.name = name;
+//        this.description = description;
+//        this.contactEmail = contactEmail;
+//    }
 
     public Event() {
         this.id = nextId;
